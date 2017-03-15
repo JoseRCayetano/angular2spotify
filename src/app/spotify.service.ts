@@ -6,7 +6,9 @@ import 'rxjs/Rx';
 
 @Injectable()
 export class SpotifyService {
+
   static BASE_URL: string = 'https://api.spotify.com/v1';
+
   constructor(public http:Http) { }
 
   searchByTrack(query: string){
@@ -32,6 +34,14 @@ export class SpotifyService {
       `q=${query}`,
       `type=${type}`
     ]);
+  }
+
+  //Para las pistas de audio
+  searchTrack(query: string): Observable<any []> {
+    return this.search(query,'track');
+  }
+  getTrack(id: string): Observable <any[]> {
+    return this.query(`/tracks/${id}`);
   }
 
 
